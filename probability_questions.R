@@ -88,6 +88,8 @@ for(count in 1:exp){
 
 count_A <- apply(winner,1,sum)
 
+count_B <- apply(winner_B,1,function(x){sum(x==0)})
+
 win_A <- ifelse(count_A == 20,1,0)
 
 sum(win_A)/exp
@@ -102,5 +104,14 @@ sum(win_A)/exp
 
 cum_winner <- t(apply(winner,1,cumsum))
 
+probability <- rep(0,11)
 
+p <- 0
+
+for(i in seq(0,toss,2)){
+  p <- p+1
+  probability[p] <- sum(ifelse(count_A == i,1,0))/exp
+}
+
+plot(probability,type='l')
 
